@@ -7,12 +7,13 @@ from datetime import datetime, timedelta
 class MockK8sCluster:
     """Generates realistic mock Kubernetes cluster data"""
     
-    def __init__(self, num_pods=20, num_service_accounts=15, num_roles=12, num_secrets=10):
+    def __init__(self, mode="random", num_pods=20, num_service_accounts=15, num_roles=12, num_secrets=10):
+        self.mode = random.choice(["low", "medium", "high"]) if mode == "random" else mode
         self.num_pods = num_pods
         self.num_service_accounts = num_service_accounts
         self.num_roles = num_roles
         self.num_secrets = num_secrets
-        
+            
         # Mock CVE database
         self.cve_database = {
             "nginx:1.19": {"cve_id": "CVE-2021-23017", "cvss_score": 8.1, "severity": "HIGH"},
